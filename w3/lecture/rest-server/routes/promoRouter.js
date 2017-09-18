@@ -1,4 +1,5 @@
 var express = require('express');
+
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
@@ -9,14 +10,11 @@ promotionRouter.use(bodyParser.json());
 
 promotionRouter.route('/')
 .get(function(req,res,next){
-      Promotions.find({}, function (err, promotion) {
-          if (err) throw err;
-          res.json(promotion);
-  })
+  Promotions.find({}, function (err, promotion) {
+      if (err) throw err;
+      res.json(promotion);
+  });
 })
-// .put(function(req,res,next){
-//         res.end('Will update all the promotion information to you!');
-// })
 
 .post(function(req, res, next){
   Promotions.create(req.body, function (err, promotion) {
@@ -41,31 +39,27 @@ promotionRouter.route('/')
 promotionRouter.route('/:promotionId')
 .get(function(req,res,next){
   Promotions.findById(req.params.promotionId, function (err, promotion) {
-      if (err) throw err;
-      res.json(promotion);
+  if (err) throw err;
+  res.json(promotion);
   });
 })
 
 .put(function(req, res, next){
   Promotions.findByIdAndUpdate(req.params.promotionId, {
-      $set: req.body
-  }, {
-      new: true
-  }, function (err, promotion) {
-      if (err) throw err;
-      res.json(promotion);
+    $set: req.body
+}, {
+    new: true
+}, function (err, promotion) {
+    if (err) throw err;
+    res.json(promotion);
   });
 })
-// .post(function(req, res, next){
-//         res.write('add the promotion: ' + req.params.promotionId + '\n');
-//     res.end('Will add the promotion: ' + req.body.name +
-//             ' with details: ' + req.body.description);
-// })
+
 .delete(function(req, res, next){
-  Promotions.findByIdAndRemove(req.params.promotionId, function (err, resp) {
-      if (err) throw err;
-      res.json(resp);
-  });
+  Dishes.findByIdAndRemove(req.params.dishId, function (err, resp) {
+    if (err) throw err;
+    res.json(resp);
+});
 });
 
 // module.exports = {

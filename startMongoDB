@@ -1,0 +1,2 @@
+go to ~/webCourse/node/hk/mongodb
+mongod --dbpath=data
